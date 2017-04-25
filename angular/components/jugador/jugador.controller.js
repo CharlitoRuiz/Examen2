@@ -17,7 +17,6 @@
           .success(function(data){
             jugadorCtrl.propiedadList = data;
           });
-        //jugadorCtrl.propiedadList = jugadorService.getPropiedad();
       }
       init();
 
@@ -56,21 +55,22 @@
         var listaJugadores = jugadorCtrl.jugadorList,
             listaPropiedades = jugadorCtrl.propiedadList,
             nombreJugador = jugadorCtrl.jugadorSeleccionado,
-            nombrePropiedad = jugadorCtrl.propiedadSeleccionado
+            idPropiedadSelect = jugadorCtrl.propiedadSeleccionado._id
 
         for (var i = 0; i < listaPropiedades.length; i++) {
-          var propiedad = listaPropiedades[i].name;
-          if (propiedad == nombrePropiedad.name) {
-            
+          var idPropiedad = listaPropiedades[i]._id;
+          
+          if (idPropiedad == idPropiedadSelect) {
             var NewPropiedad = {
+                _id : jugadorCtrl.propiedadList[i]._id,
                 name : jugadorCtrl.propiedadList[i].name,
-                id : jugadorCtrl.propiedadList[i].id,
+                id_propiedad : jugadorCtrl.propiedadList[i].id,
                 posistion : jugadorCtrl.propiedadList[i].posistion,
                 price : jugadorCtrl.propiedadList[i].price,
                 rent : jugadorCtrl.propiedadList[i].rent,
                 housecost : jugadorCtrl.propiedadList[i].housecost,
                 group : jugadorCtrl.propiedadList[i].group,
-                ownedby : nombreJugador.id,
+                ownedby : nombreJugador.codigo,
                 ownername : nombreJugador.name,
                 buildings : jugadorCtrl.propiedadList[i].buildings
             }
@@ -81,22 +81,23 @@
               if (jugador == nombreJugador.name) {
             
               var NewJugador = {
-                  id : jugadorCtrl.jugadorList[i].id,
+                  _id : jugadorCtrl.jugadorList[i]._id,
+                  codigo : jugadorCtrl.jugadorList[i].codigo,
                   name : jugadorCtrl.jugadorList[i].name,
-                  alias : jugadorCtrl.jugadorList[i].posistion,
+                  alias : jugadorCtrl.jugadorList[i].alias,
                   money : jugadorCtrl.jugadorList[i].money - jugadorCtrl.propiedadList[i].price,
                   photo : jugadorCtrl.jugadorList[i].photo
               }
                 jugadorService.setLocalJugador(NewJugador);
-                
-                jugadorCtrl.jugadorSeleccionado = null;
-                jugadorCtrl.propiedadSeleccionado = null;
-                init();
+                idPropiedad = listaPropiedades[i+1]._id;
 
             }
           }
         }
       }
+              init();
+              jugadorCtrl.jugadorSeleccionado = null;
+              jugadorCtrl.propiedadSeleccionado = null;
     }
   } //se establece un objeto de angular normal
   

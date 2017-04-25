@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird');
 //Esquema de usuarios
 var PropiedadSchema = new mongoose.Schema({
   name:String,
-  id: String,
+  id_propiedad: String,
   posistion: String,
   price: String,
   rent: String,

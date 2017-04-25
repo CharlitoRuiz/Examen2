@@ -1,0 +1,171 @@
+<md-toolbar>
+  <h2 class="md-toolbar-tools">
+      <span>Examen 1</span>
+  </h2>
+</md-toolbar>
+
+<md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+<md-tab label="Agregar jugador">
+<section>
+  <md-content layout-padding>
+    <div>
+      <form name="jugadorForm">
+        
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Codigo</label>
+            <input type="number" required ng-model="jugadorCtrl.codigo" name="codigo">
+            <div ng-messages="jugadorForm.codigo.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">Debe ingresar un valor</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Nombre</label>
+            <input ng-model="jugadorCtrl.nombre" required name="nombre">
+              <div ng-messages="jugadorForm.nombre.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">Debe ingresar un nombre</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Alias</label>
+            <input ng-model="jugadorCtrl.alias" required name="alias">
+              <div ng-messages="jugadorForm.alias.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">Debe ingresar un alias</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block">
+            <label>Foto</label>
+            <input type="file"  id="photo" ng-model="jugadorCtrl.imagen">
+          </md-input-container>
+        </div>
+
+        <md-button class="md-fab md-primary" aria-label="Ingresar pelicula" ng-click="jugadorCtrl.preSave()">
+          <md-icon md-svg-src="vendor/img/icons/ic_add.svg"></md-icon>
+          <md-tooltip md-direction="bottom">Agregar jugador</md-tooltip>
+        </md-button>
+
+      </form>
+    </div>
+  </md-content>
+</section>
+</md-tab>
+
+<md-tab label="Consulta de propiedades">
+<table id="tblInfo" class="col-lg-offset-1 col-lg-10">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>id</th>
+      <th>posistion</th>
+      <th>price</th>
+      <th>rent</th>
+      <th>housecost</th>
+      <th>group</th>
+      <th>ownedby</th>
+      <th>buildings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="propiedad in jugadorCtrl.propiedadList">
+      <td>{{propiedad.name}}</td>
+      <td>{{propiedad.id}}</td>
+      <td>{{propiedad.posistion}}</td>
+      <td>{{propiedad.price}}</td>
+      <td>{{propiedad.rent}}</td>
+      <td>{{propiedad.housecost}}</td>
+      <td>{{propiedad.group}}</td>
+      <td>{{propiedad.ownedby}}</td>
+      <td>{{propiedad.buildings}}</td>
+      <!-- <td><img ng-src="{{movie.image}}"></td> -->
+    </tr>
+  </tbody>
+</table>
+</md-tab>
+
+<md-tab label="Consulta de jugadores">
+<table id="tblInfo" class="col-lg-offset-1 col-lg-10">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Alias</th>
+      <th>Dinero</th>
+      <th>Foto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="jugador in jugadorCtrl.jugadorList">
+      <td>{{jugador.codigo}}</td>
+      <td>{{jugador.name}}</td>
+      <td>{{jugador.alias}}</td>
+      <td>{{jugador.money}}</td>
+      <td><img ng-src="{{jugador.photo}}"></td>
+    </tr>
+  </tbody>
+</table>
+</md-tab>
+
+<md-tab label="Comprar propiedad">
+
+<md-content layout-padding>
+  <div layout-gt-sm="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Jugador</label>
+        <md-select required ng-model="jugadorCtrl.jugadorSeleccionado" name="jugador" >
+          <md-option ng-value="jugador" ng-repeat="jugador in jugadorCtrl.jugadorList">{{jugador.name}}</md-option>
+        </md-select>
+        <div ng-messages="jugadorForm.jugador.$error" role="alert" multiple>
+        <div ng-message="required" class="my-message">Debe seleccionar una opcion</div>
+        </div>
+    </md-input-container>
+  </div>
+
+  <div layout-gt-sm="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Propiedad a comprar</label>
+        <md-select required ng-model="jugadorCtrl.propiedadSeleccionado" name="propiedad" >
+          <md-option ng-value="propiedad" ng-repeat="propiedad in jugadorCtrl.propiedadList">{{propiedad.name}}</md-option>
+        </md-select>
+        <div ng-messages="jugadorForm.propiedad.$error" role="alert" multiple>
+        <div ng-message="required" class="my-message">Debe seleccionar una opcion</div>
+        </div>
+    </md-input-container>
+  </div>
+
+  <md-button class="md-fab md-primary" aria-label="Comprar propiedad" ng-click="jugadorCtrl.comprarPropiedad()">
+    <md-icon md-svg-src="vendor/img/icons/check.svg"></md-icon>
+    <md-tooltip md-direction="bottom">Comprar propiedad</md-tooltip>
+  </md-button>
+
+</md-content>
+</md-tab>
+
+<md-tab label="Ver propiedades por dueño">
+<table id="tblInfo" class="col-lg-offset-1 col-lg-10">
+  <thead>
+    <tr>
+      <th>Nombre la propiedad</th>
+      <th>Dueño</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="propiedad in jugadorCtrl.propiedadList">
+      <td>{{propiedad.name}}</td>
+      <td>{{propiedad.ownername}}</td>
+      <td>{{propiedad.price}}</td>
+    </tr>
+  </tbody>
+</table>
+</md-content>
+</md-tab>
+</md-tabs>

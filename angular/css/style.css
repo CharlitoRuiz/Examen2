@@ -1,0 +1,61 @@
+body{
+font-family: 'Raleway', sans-serif;
+}
+
+#photo{
+  margin-top: 7%;
+  height: 40px;
+}
+
+.md-toolbar-tools{
+  margin-bottom: : 15px;
+}
+
+#tblInfo{
+
+	margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#tblInfo tr{
+
+  height: 20px;
+  margin-bottom: 500px;
+}
+
+/* titulo de la tabla */
+#tblInfo thead tr{
+
+  background: #499491;
+  color: #fff;
+  border-bottom: 2px solid #353940;
+  font-size: 14px;
+}
+
+#tblInfo thead tr th{
+
+  width: 100px;
+  text-align: center;
+  margin-left: 50px;
+  padding: 10px;
+}
+
+/* Cada linea de primera */
+#tblInfo tbody tr{
+
+	color: #000;
+  	background-color: #fff;
+}
+/* cada celda */
+#tblInfo tbody tr:nth-child(even){
+	
+  background: #A3DEC9;
+  color: #000;
+}
+
+#tblInfo tbody tr td{
+
+  width: 170px;
+  text-align: center;
+  padding: 1px;
+}

@@ -7,7 +7,8 @@ var JugadorSchema = new mongoose.Schema({
   name: String,
   alias: String,
   money: Number,
-  photo: String
+  photo: String,
+  bio: String
 });
 
 module.exports = mongoose.model('Jugador', JugadorSchema); //nombre del modelo dentro del back end y el userSchema es el nombre dentro de mongoose

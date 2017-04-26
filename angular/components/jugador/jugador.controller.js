@@ -28,13 +28,30 @@
           });
       }
 
-      jugadorCtrl.save= function(pimage){
+      var client = filestack.init('AnEFFwqe3SjCu3T9SjuGiz');
+      jugadorCtrl.showPicker = function () {
+          client.pick({
+            fromSources: ['local_file_system', 'imagesearch'],
+            lang: 'es',
+            maxFiles: 1,
+            accept: ['.doc', '.pdf', '.docx']
+          }).then(function(result) {
+              var urlResumen = result.filesUploaded[0].url;
+              console.log(JSON.stringify(urlResumen))
+              jugadorCtrl.bio = result.filesUploaded[0].filename;
+              jugadorCtrl.url = result.filesUploaded[0].url;
+              init();
+          });
+      }
+
+      jugadorCtrl.save= function(pimage, urlResumen){
         var newJugador ={
           codigo : jugadorCtrl.codigo,
           name : jugadorCtrl.nombre,
           alias : jugadorCtrl.alias,
           money : 1000,
-          photo: pimage
+          photo: pimage,
+          bio : jugadorCtrl.url
         }
 
         jugadorService.addJugador(newJugador)
@@ -46,6 +63,7 @@
           jugadorCtrl.alias = null;
           jugadorCtrl.dinero = null;
           jugadorCtrl.imagen = null;
+          jugadorCtrl.bio = null;
           init();
         })
 

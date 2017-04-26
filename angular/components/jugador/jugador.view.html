@@ -1,6 +1,6 @@
 <md-toolbar>
   <h2 class="md-toolbar-tools">
-      <span>Examen 1</span>
+      <span>Examen 2 - Carlos Ruiz Campos</span>
   </h2>
 </md-toolbar>
 
@@ -42,10 +42,27 @@
         </div>
 
         <div layout-gt-sm="row">
-          <md-input-container class="md-block">
+          <md-input-container class="md-block" flex-gt-sm>
             <label>Foto</label>
-            <input type="file"  id="photo" ng-model="jugadorCtrl.imagen">
+            <input type="file"  id="photo" ng-model="jugadorCtrl.imagen" >
           </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Biografia (.doc o .pdf)</label>
+            <input type="button" ng-click="jugadorCtrl.showPicker()" class="btn btn-default" value="Buscar archivo">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block">
+          <input disabled ng-model="jugadorCtrl.bio" id="nombreArchivo" placeholder="Archivo cargado">
+          </md-input-container>
+        </div>
+
+        <div>
+        <input type="hidden" ng-model="jugadorCtrl.url">
         </div>
 
         <md-button class="md-fab md-primary" aria-label="Ingresar pelicula" ng-click="jugadorCtrl.preSave()">
@@ -100,6 +117,7 @@
       <th>Alias</th>
       <th>Dinero</th>
       <th>Foto</th>
+      <th>Descargar Bio</th>
     </tr>
   </thead>
   <tbody>
@@ -109,6 +127,7 @@
       <td>{{jugador.alias}}</td>
       <td>{{jugador.money}}</td>
       <td><img ng-src="{{jugador.photo}}"></td>
+      <td><a href="{{jugador.bio}}"><md-button class="btn btn-primary">Descargar BIO</md-button></a></td>
     </tr>
   </tbody>
 </table>

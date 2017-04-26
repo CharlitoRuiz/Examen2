@@ -9,7 +9,8 @@ module.exports.save = function(req,res){ //exporta el controlador
           name:req.body.name,
           alias:req.body.alias,
           money:req.body.money,
-          photo:req.body.photo
+          photo:req.body.photo,
+          bio:req.body.bio
         });
 
         newJugador.save(function(err){
